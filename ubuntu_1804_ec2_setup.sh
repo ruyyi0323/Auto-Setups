@@ -52,8 +52,14 @@ sudo apt install bashtop -y
 
 # ==== part 6: Enhance vim ====
 echo "Installing PlugIns for vim to Enhance the Power of it, check https://github.com/amix/vimrc"
-git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-sh ~/.vim_runtime/install_awesome_vimrc.sh
+vim_config_download_path="~/.vim_runtime"
+if [ ! -d "$vim_config_download_path" ];
+then
+	echo "$vim_config_download_path Already Existed, Maybe you have already installed plugins from this repo, skipping ..."
+else
+	git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+	sh ~/.vim_runtime/install_awesome_vimrc.sh
+fi
 
 # ==== part 6.2: Install vim-airline ====
 cd ~/.vim_runtime
