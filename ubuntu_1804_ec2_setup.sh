@@ -48,7 +48,7 @@ fi
 # ==== part 5: Install Bashtop ====
 echo "Installing Bashtop, which allows you to track the system resource allocation by simply use command 'bashtop' "
 sudo add-apt-repository ppa:bashtop-monitor/bashtop -y
-sudo apt install bashtop -y
+sudo apt install --no-upgrade bashtop -y
 
 # ==== part 6: Enhance vim ====
 echo "Installing PlugIns for vim to Enhance the Power of it, check https://github.com/amix/vimrc"
@@ -63,7 +63,14 @@ fi
 
 # ==== part 6.2: Install vim-airline ====
 cd ~/.vim_runtime
-git clone https://github.com/vim-airline/vim-airline.git my_plugins/vim-airline
+vim_airline_download_path="my_plugins/vim-airline"
+if [ ! -d "$vim_airline_download_path" ];
+then
+	echo "$vim_airline_download_path Already Existed, Maybe you have already installed plugins from this repo, skipping ..."
+else
+	git clone https://github.com/vim-airline/vim-airline.git my_plugins/vim-airline
+fi
+
 
 # ==== part 7: Clean up ====
 cd ~
