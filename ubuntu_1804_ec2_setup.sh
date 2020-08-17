@@ -71,7 +71,15 @@ else
 	git clone https://github.com/vim-airline/vim-airline.git my_plugins/vim-airline
 fi
 
+# ==== part 7: vscode-server installation ====
+echo "Installing vscode-server, usage of this service can be seen here https://github.com/cdr/code-server/blob/master/doc/install.md"
+curl -fsSL https://code-server.dev/install.sh | sh
+echo "Changing the binding port to 12110, the original port 8080 may be conflict with jupyter notebook"
+systemctl --user enable --now code-server
+code-server -vvv -bind-address localhost:12110
+echo "Every time you restart you may need to rerun this command code-server -vvv -bind-address localhost:12110"
+echo "Enter the password that appears in this folder ~/.config/code-server/config.yaml"
 
-# ==== part 7: Clean up ====
-cd ~
+# ==== part 8: Clean up ====
+cd ~ 
 echo "All Steps Complete"
